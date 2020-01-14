@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>Complete JavaScript Course</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #center {
+        height: 50vh;
+        background-color: rgba(141, 161, 155, 0.712);
+        border: 2px solid gold;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="center">
+      <input type="file" id="imgLoader" />
+      <br />
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <script>
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+      var imgLoader = document.getElementById("imgLoader");
+      imgLoader.addEventListener("change", upImage, false);
+
+      function upImage() {
+        var r = new FileReader();
+        r.readAsDataURL(event.target.files[0]);
+        r.onload = function(e) {
+          var img = new Image();
+          img.src = event.target.result;
+          img.onload = function() {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            ctx.font = "30px Arial";
+            ctx.fillText("JavaScript Canvas", 10, 100);
+          };
+          console.log(r);
+        };
+      }
+    </script>
+  </body>
+</html>
